@@ -1,36 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_line.c                                       :+:      :+:    :+:   */
+/*   exec_pipeline.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jocarras <jocarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/16 13:55:41 by jocarras          #+#    #+#             */
-/*   Updated: 2025/12/17 18:07:01 by jocarras         ###   ########.fr       */
+/*   Created: 2025/12/16 17:50:35 by jocarras          #+#    #+#             */
+/*   Updated: 2025/12/16 17:50:36 by jocarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minishell.h"
-#include "libft.h"
-
-t_cmd	*parse_line(char *line, t_shell *sh)
-{
-	t_cmd	*cmd;
-	char	**argv;
-
-	(void)sh;
-	if (!line || !*line)
-		return (NULL);
-	argv = ft_split(line, ' ');
-	if (!argv || !argv[0])
-		return (NULL);
-	cmd = malloc(sizeof(t_cmd));
-	if (!cmd)
-		return (NULL);
-	cmd->argv = argv;
-	cmd->redirs = NULL;
-	cmd->is_builtin = 0;
-	cmd->next = NULL;
-	return (cmd);
-}
 

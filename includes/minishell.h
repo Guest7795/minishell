@@ -5,6 +5,8 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include <stdio.h>
+# include "libft.h"
+
 
 // ===== ENUMS =====
 typedef enum e_redir_type {
@@ -39,5 +41,10 @@ t_cmd	*parse_line(char *line, t_shell *sh);
 
 // ===== UTILS =====
 void	free_cmds(t_cmd *cmds);
+
+/*EXEC*/
+void	exec_simple(t_cmd *cmd, t_shell *sh);
+
+int	builtin_echo(char **argv);
 
 #endif

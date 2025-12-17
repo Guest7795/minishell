@@ -6,7 +6,7 @@
 /*   By: jocarras <jocarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 13:55:06 by jocarras          #+#    #+#             */
-/*   Updated: 2025/12/16 13:55:09 by jocarras         ###   ########.fr       */
+/*   Updated: 2025/12/17 18:16:52 by jocarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,16 @@ int	main(int argc, char **argv, char **envp)
 
 	while (1)
 	{
-		line = readline("minishell$ ");
+		line = readline("minideath$ ");
 		if (!line) // Ctrl-D
 			break ;
 		if (*line)
 			add_history(line);
 
 		cmds = parse_line(line, &sh);
+		if (cmds)
+			exec_simple(cmds, &sh);
+		printf("last_status = %d\n", sh.last_status);
 		free_cmds(cmds);
 
 		free(line);

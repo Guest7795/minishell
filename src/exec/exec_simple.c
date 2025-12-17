@@ -6,7 +6,7 @@
 /*   By: jocarras <jocarras@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/15 18:34:09 by jocarras          #+#    #+#             */
-/*   Updated: 2025/12/16 15:26:44 by jocarras         ###   ########.fr       */
+/*   Updated: 2025/12/17 17:23:05 by jocarras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	exec_simple(t_cmd *cmd, t_shell *sh)
 {
-		printf("exec_simple appelee\n");
 	int	pid;
-	int status;
+	int	status;
 
+	if (cmd->argv && cmd->argv[0]
+		&& ft_strncmp(cmd->argv[0], "echo", 5) == 0)
+	{
+		sh->last_status = builtin_echo(cmd->argv);
+		return ;
+	}	
 	pid = fork();
 	if (pid == -1)
 		return ;
@@ -30,5 +35,8 @@ void	exec_simple(t_cmd *cmd, t_shell *sh)
 	else
 	{
 		waitpid(pid, &status, 0);
+		if (WIFEXITED(status))
+			sh->last_status = WEXITSTATUS(status);
 	}
 }
+
